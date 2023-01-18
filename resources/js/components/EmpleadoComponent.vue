@@ -140,7 +140,7 @@ export default {
         nombrecaja:"",
         tickets:[],
         // socket : io('http://192.168.154.130:3000'),
-        socket : io('http://127.0.0.1:3000'),
+        socket : io('http://192.168.154.208:3000'),
     }),
 }
 </script>
