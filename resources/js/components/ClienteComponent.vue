@@ -19,7 +19,7 @@
             <div class="grid" id="fichas" >
                                     <div  class="col" style="display: flex;align-items: center;text-align: center">
                                         <p style="  font-size:3em;font-weight:bold;text-align: center;width: 100%" >
-                                                 TC-8->10
+
                                         </p>
                                     </div>
             </div>
@@ -70,7 +70,7 @@ export default {
             cont++;
             // console.log(newVideo);
             newVideo.src = "video/spot"+cont+".mp4";
-            if (cont==9)cont=0;
+            if (cont==2)cont=0;
             newVideo.load();
         }, false);
         newVideo.play();
@@ -136,7 +136,7 @@ export default {
                 src: "video/spot"+this.video+".mp4"
             }];
             this.onPlayerPlay(player);
-            if (this.video==9) this.video=0;
+            if (this.video==2) this.video=0;
         }
     }
 }

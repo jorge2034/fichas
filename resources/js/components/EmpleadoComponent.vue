@@ -95,6 +95,10 @@ export default {
     mounted() {
         // console.log('Component mounted.')
         axios.get('/unit').then(res=>this.units=res.data)
+
+        this.socket.on('chat message', function(msg){
+          console.log("mensaje socket",msg)
+        });
     },
     methods:{
         datosatender(nombrecaja){
@@ -106,6 +110,7 @@ export default {
             axios.post('/atender',{nombrecaja:this.nombrecaja,unit_id:this.user.unit_id})
                 .then(res=>{
                     // this.tickets=res.data
+                    console.log("atender",res.data)
                     this.datosatender(this.nombrecaja);
                     axios.post('/ultificha',{unit_id:this.user.unit_id})
                         .then(res=>{
@@ -113,7 +118,7 @@ export default {
                             this.socket.emit('chat message', res.data.numero+"->"+res.data.empleado);
                         });
                 }).catch(res=>{
-                    alert('todos los clientes fuerona tendidos')
+                    alert('Todos los clientes fueron atendidos')
                 });
         },
         login(){

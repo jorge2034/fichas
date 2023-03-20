@@ -18,8 +18,8 @@
 
                                         <v-card-subtitle v-text="item.nombre"></v-card-subtitle>
                                     </div>
-                                    <v-avatar class="ma-3" size="125" tile>
-                                        <v-img :src="'img/'+item.id+'.jpg'"></v-img>
+                                    <v-avatar class="ma-2" size="250" tile>
+                                        <v-img class="imagen" :src="'img/'+item.id+'.jpg'" cover></v-img>
                                     </v-avatar>
                                 </div>
                             </v-card>
@@ -36,6 +36,11 @@
         </v-app>
     </v-app>
 </template>
+<style scoped>
+.imagen {
+    width:100%;
+}
+</style>
 
 <script>
 import moment from 'moment';
@@ -47,6 +52,7 @@ import moment from 'moment';
         methods:{
             ticket(item){
                 // console.log('aaa');
+                moment.locale('es');
                 axios.post('/ticket',{unit_id:item.id}).then(async res=>{
                     console.log(res.data);
                     let myWindow = await window.open("", "myWindow", "width=200,height=100");
@@ -56,14 +62,15 @@ import moment from 'moment';
                             '<p>'+item.nombre+'</p>' +
                             '<h4>'+res.data.numero+'</h4>' +
                             '<p>Tome asiento y espere su turno</p>' +
-                            '<p>'+moment().format('MMMM Do YYYY, h:mm:ss a')+'</p>' +
+                            '<p>'+moment().format('D MMMM YYYY, h:mm:ss a')+'</p>' +
                             '</div>' +
                         '</div>');
                     myWindow.focus();
-                    setTimeout(function(){
-                        myWindow.print();
-                        myWindow.close();
-                    },250);
+                    myWindow.print();
+                    myWindow.close();
+                    // setTimeout(function(){
+
+                    // },250);
 
                 })
             }
